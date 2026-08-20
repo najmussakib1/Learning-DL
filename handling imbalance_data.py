@@ -34,3 +34,19 @@ print('Random over-sampling:')
 print(df_test_over.Churn.value_counts())
 
 # after that do NN processing
+
+
+# 3. SMOTE pip install imbalanced-learn
+X = df2.drop('Churn',axis='columns')
+y = df2['Churn']
+from imblearn.over_sampling import SMOTE
+
+smote = SMOTE(sampling_strategy='minority')
+X_sm, y_sm = smote.fit_sample(X, y)
+
+y_sm.value_counts()
+
+# ensemble  
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=15, stratify=y)
+
